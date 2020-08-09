@@ -373,8 +373,9 @@ FodyWeavers.xsd
 .idea/
 build/
 
-# Java
+# Java & Kotlin
 
 .gradle/
 gradle/
 *gradle*
+*.keep
