@@ -39,8 +39,12 @@ public class Robot
         return stringBuilder.ToString();
     }
 
-    private char GenerateChar(char from, char to) 
-        => (char)(random.Next(to - from + 1) + from);
+    private char GenerateChar(char from, char to)
+        => (char)(random.Next(from, to + 1));
 
-    public void Reset() => name = null;
+    public void Reset()
+    {
+        names.Remove(name);
+        name = null;
+    }
 }
