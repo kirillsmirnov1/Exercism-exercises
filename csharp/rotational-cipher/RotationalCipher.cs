@@ -9,18 +9,9 @@ public static class RotationalCipher
 
     private static char RotateChar(char c, int key)
     {
-        if (c >= 'a' && c <= 'z')
-        {
-            return (char)('a' + RotateInt(c - 'a', key));
-        }
+        if (!char.IsLetter(c)) return c;
 
-        if (c >= 'A' && c <= 'Z')
-        {
-            return (char)('A' + RotateInt(c - 'A', key));
-        }
-
-        return c;
+        var shift = char.IsLower(c) ? 'a' : 'A';
+        return (char)(shift + (c - shift + key) % AlphabetSize);
     }
-
-    private static int RotateInt(int c, int key) => (c + key) % AlphabetSize;
 }
