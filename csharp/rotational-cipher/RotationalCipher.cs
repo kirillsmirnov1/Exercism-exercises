@@ -3,8 +3,9 @@ using System.Linq;
 public static class RotationalCipher
 {
     private const int AlphabetSize = 26;
+
     public static string Rotate(string text, int shiftKey)
-        => text.Select(c => RotateChar(c, shiftKey)).Aggregate("", (a, b) => a + b);
+         => new string(text.Select(c => RotateChar(c, shiftKey)).ToArray());
 
     private static char RotateChar(char c, int key)
     {
