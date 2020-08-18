@@ -6,9 +6,11 @@ public static class CryptoSquare
 {
     public static string Ciphertext(string plaintext)
     {
-        if (plaintext.Length == 0) return "";
+        string filteredInput = Filter(plaintext);
         
-        string oneLiner = ToOneliner(plaintext, out int r, out int c);
+        if (filteredInput.Length <= 1) return filteredInput;
+        
+        string oneLiner = AddSpaces(filteredInput, out int r, out int c);
         char[][] charMatrix = ToCharMatrix(oneLiner, r, c);
         char[][] cipheredMatrix = CipherMatrix(charMatrix);
         
@@ -42,20 +44,19 @@ public static class CryptoSquare
             .Select(rowI => oneLiner.Substring(rowI * c, c).ToCharArray())
             .ToArray();
 
-    private static string ToOneliner(string plainText, out int r, out int c)
+    private static string AddSpaces(string characters, out int r, out int c)
     {
-        string characters = new string(plainText.ToLower().Where(char.IsLetterOrDigit).ToArray());
-        
         c = (int)Math.Floor(Math.Sqrt(characters.Length));
         r = c;
 
         if (c * r < characters.Length) c++;
         if (c * r < characters.Length) r++;
+
+        var spacesToAdd = r * c - characters.Length;
         
-        return new string(
-            Enumerable
-                .Range(0, r * c - characters.Length)
-                .Aggregate(characters, (a, b) => a + ' ')
-                .ToArray());
+        return characters + new string(Enumerable.Repeat(' ', spacesToAdd).ToArray());
     }
+    
+    private static string Filter(string plainText) => 
+        new string(plainText.ToLower().Where(char.IsLetterOrDigit).ToArray());
 }
