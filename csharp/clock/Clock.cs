@@ -2,7 +2,7 @@ using System;
 
 #nullable enable
 
-public class Clock
+public class Clock : IEquatable<Clock>
 {
     private readonly int _hours;
     private readonly int _minutes;
@@ -45,6 +45,8 @@ public class Clock
     }
 
     public override string ToString() => $"{_hours:D2}:{_minutes:D2}";
+
+    public bool Equals(Clock other) => other != null && other._hours == _hours && other._minutes == _minutes;
 
     public override bool Equals(object? obj)
     {
