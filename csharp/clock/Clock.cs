@@ -17,17 +17,17 @@ public class Clock : IEquatable<Clock>
     {
         if (minutes < 0)
         {
-            var diff = minutes / 60 - 1;
-            minutes -= diff * 60;
-            hours += diff;
+            var hoursDiff = minutes / 60 - 1;
+            minutes -= hoursDiff * 60;
+            hours += hoursDiff;
         }
         
         // It's not else-if to handle 00:60
         // Which we'll get, if input minutes are -60 * x
         if (minutes >= 60) 
         {
-            hours += minutes / 60;
-            minutes %= 60;
+            hours += Math.DivRem(minutes, 60, out int remainder);
+            minutes = remainder;
         }
         
         if (hours < 0)
