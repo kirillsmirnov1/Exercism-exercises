@@ -2,15 +2,14 @@ using System.Collections.Generic;
 
 public static class MatchingBrackets
 {
-    private static readonly HashSet<char> Openers = new HashSet<char> {'(', '[', '{'};
-    private static readonly HashSet<char> Closers = new HashSet<char> {')', ']', '}'};
-    
     private static readonly Dictionary<char, char> Pairs = new Dictionary<char, char>
     {
         ['('] = ')',
         ['['] = ']',
         ['{'] = '}'
     };
+
+    private static readonly HashSet<char> Closers = new HashSet<char> {')', ']', '}'};
     
     public static bool IsPaired(string input)
     {
@@ -18,7 +17,7 @@ public static class MatchingBrackets
         
         foreach (var c in input.ToCharArray())
         {
-            if (Openers.Contains(c))
+            if (Pairs.ContainsKey(c))
             {
                 q.AddLast(c);
             }
