@@ -9,25 +9,21 @@ public static class MatchingBrackets
         ['{'] = '}'
     };
 
-    private static readonly HashSet<char> Closers = new HashSet<char> {')', ']', '}'};
+    private static readonly HashSet<char> Closers = new HashSet<char>(Pairs.Values);
     
     public static bool IsPaired(string input)
     {
-        var q = new LinkedList<char>();
+        var q = new Stack<char>();
         
         foreach (var c in input.ToCharArray())
         {
             if (Pairs.ContainsKey(c))
             {
-                q.AddLast(c);
+                q.Push(c);
             }
             else if (Closers.Contains(c))
             {
-                if (q.Last != null && Pairs[q.Last.Value] == c)
-                {
-                    q.RemoveLast();
-                }
-                else
+                if (q.Count == 0 || Pairs[q.Pop()] != c)
                 {
                     return false;
                 }
