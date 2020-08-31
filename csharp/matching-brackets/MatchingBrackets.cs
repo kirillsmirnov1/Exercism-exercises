@@ -23,7 +23,7 @@ public static class MatchingBrackets
             }
             else if (Closers.Contains(c))
             {
-                if (q.Count == 0 || Pairs[q.Pop()] != c)
+                if (!q.TryPop(out char pop) || Pairs[pop] != c)
                 {
                     return false;
                 }
