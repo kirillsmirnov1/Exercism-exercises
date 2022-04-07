@@ -1,3 +1,3 @@
-export const gigasecond = () => {
-  throw new Error('Remove this statement and implement this function');
+export const gigasecond = (oldDate) => {
+  return new Date(oldDate.getTime() + 1000000000000);
 };
