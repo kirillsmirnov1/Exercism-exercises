@@ -1,15 +1,15 @@
 // @ts-check
 
 export function canExecuteFastAttack(knightIsAwake) {
-  throw new Error('Remove this line and implement the function');
+  return !knightIsAwake;
 }
 
 export function canSpy(knightIsAwake, archerIsAwake, prisonerIsAwake) {
-  throw new Error('Remove this line and implement the function');
+  return knightIsAwake || archerIsAwake || prisonerIsAwake;
 }
 
 export function canSignalPrisoner(archerIsAwake, prisonerIsAwake) {
-  throw new Error('Remove this line and implement the function');
+  return prisonerIsAwake && !archerIsAwake;
 }
 
 export function canFreePrisoner(
@@ -18,5 +18,6 @@ export function canFreePrisoner(
   prisonerIsAwake,
   petDogIsPresent
 ) {
-  throw new Error('Remove this line and implement the function');
+  return (petDogIsPresent && !archerIsAwake) 
+  || (prisonerIsAwake && !archerIsAwake && !knightIsAwake);
 }
